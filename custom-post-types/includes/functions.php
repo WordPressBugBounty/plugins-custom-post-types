@@ -5,6 +5,9 @@
  */
 function cpt_admin_notices() {
 	global $cpt_admin_notices;
+	if ( ! class_exists( 'CPT_Admin_Notices' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_admin_notices instanceof CPT_Admin_Notices ) ) {
 		$cpt_admin_notices = new CPT_Admin_Notices();
 	}
@@ -16,6 +19,9 @@ function cpt_admin_notices() {
  */
 function cpt_admin_pages() {
 	global $cpt_admin_pages;
+	if ( ! class_exists( 'CPT_Admin_Pages' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_admin_pages instanceof CPT_Admin_Pages ) ) {
 		$cpt_admin_pages = new CPT_Admin_Pages();
 	}
@@ -27,6 +33,9 @@ function cpt_admin_pages() {
  */
 function cpt_ajax() {
 	global $cpt_ajax;
+	if ( ! class_exists( 'CPT_Ajax' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_ajax instanceof CPT_Ajax ) ) {
 		$cpt_ajax = new CPT_Ajax();
 	}
@@ -49,6 +58,9 @@ function cpt_core() {
  */
 function cpt_field_groups() {
 	global $cpt_field_groups;
+	if ( ! class_exists( 'CPT_Field_Groups' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_field_groups instanceof CPT_Field_Groups ) ) {
 		$cpt_field_groups = new CPT_Field_Groups();
 	}
@@ -60,6 +72,9 @@ function cpt_field_groups() {
  */
 function cpt_fields() {
 	global $cpt_fields;
+	if ( ! class_exists( 'CPT_Fields' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_fields instanceof CPT_Fields ) ) {
 		$cpt_fields = new CPT_Fields();
 	}
@@ -71,6 +86,9 @@ function cpt_fields() {
  */
 function cpt_plugin() {
 	global $cpt_plugin;
+	if ( ! class_exists( 'CPT_Plugin' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_plugin instanceof CPT_Plugin ) ) {
 		$cpt_plugin = new CPT_Plugin();
 	}
@@ -82,6 +100,9 @@ function cpt_plugin() {
  */
 function cpt_post_types() {
 	global $cpt_post_types;
+	if ( ! class_exists( 'CPT_Post_Types' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_post_types instanceof CPT_Post_Types ) ) {
 		$cpt_post_types = new CPT_Post_Types();
 	}
@@ -93,6 +114,9 @@ function cpt_post_types() {
  */
 function cpt_shortcodes() {
 	global $cpt_shortcodes;
+	if ( ! class_exists( 'CPT_Shortcodes' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_shortcodes instanceof CPT_Shortcodes ) ) {
 		$cpt_shortcodes = new CPT_Shortcodes();
 	}
@@ -104,6 +128,9 @@ function cpt_shortcodes() {
  */
 function cpt_taxonomies() {
 	global $cpt_taxonomies;
+	if ( ! class_exists( 'CPT_Taxonomies' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_taxonomies instanceof CPT_Taxonomies ) ) {
 		$cpt_taxonomies = new CPT_Taxonomies();
 	}
@@ -115,6 +142,9 @@ function cpt_taxonomies() {
  */
 function cpt_ui() {
 	global $cpt_ui;
+	if ( ! class_exists( 'CPT_Ui' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_ui instanceof CPT_Ui ) ) {
 		$cpt_ui = new CPT_Ui();
 	}
@@ -126,6 +156,9 @@ function cpt_ui() {
  */
 function cpt_utils() {
 	global $cpt_utils;
+	if ( ! class_exists( 'CPT_Utils' ) ) {
+		cpt_core()->includes();
+	}
 	if ( ! ( $cpt_utils instanceof CPT_Utils ) ) {
 		$cpt_utils = new CPT_Utils();
 	}

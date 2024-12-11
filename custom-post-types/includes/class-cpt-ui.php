@@ -70,6 +70,7 @@ final class CPT_Ui extends CPT_Component {
 			$plugins[ $key ] = $value['Version'];
 		}
 		return array(
+			'php_version'    => function_exists( 'phpversion' ) ? phpversion() : 'None',
 			'wp_version'     => get_bloginfo( 'version' ),
 			'active_theme'   => array( $active_theme->get( 'ThemeURI' ) => $active_theme->get( 'Version' ) ),
 			'active_plugins' => $plugins,

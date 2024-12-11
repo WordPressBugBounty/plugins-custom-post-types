@@ -3,8 +3,8 @@ Contributors: totalpressorg, andreadegiovine
 Tags: cpt, custom post types, custom fields, custom templates, custom taxonomies
 Donate link: https://totalpress.org/donate?utm_source=wordpress_org&utm_medium=plugin_page&utm_campaign=custom_post_types
 Requires at least: 4.0
-Tested up to: 6.4
-Stable tag: 5.0.5
+Tested up to: 6.7
+Stable tag: 5.0.6
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -186,6 +186,11 @@ To **manually install** the "Custom post types" plugin you can download the late
 Now on the "Plugins" section of your WordPress dashboard you can see the "Custom post types" plugin, click on "Activate".
 
 == Changelog ==
+
+= 5.0.6 - 2024-04-03 =
+* FIX: version_compare first argument null;
+* FIX: check if class exist before short load using functions.php;
+* FEAT: add phpversion on feedback request;
 
 = 5.0.5 - 2024-04-03 =
 * FIX: sanitize shortcodes output;

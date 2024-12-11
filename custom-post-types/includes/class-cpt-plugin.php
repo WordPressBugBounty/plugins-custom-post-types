@@ -81,7 +81,7 @@ final class CPT_Plugin extends CPT_Component {
 	private function apply_updates() {
 		$installed_version = get_option( cpt_utils()->get_option_name( 'version' ), null );
 
-		if ( version_compare( $installed_version, CPT_VERSION, '=' ) ) {
+		if ( $installed_version && version_compare( $installed_version, CPT_VERSION, '=' ) ) {
 			return;
 		}
 
