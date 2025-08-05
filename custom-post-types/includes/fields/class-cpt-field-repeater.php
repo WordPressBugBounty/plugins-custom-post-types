@@ -41,7 +41,7 @@ class CPT_Field_Repeater extends CPT_Field {
 		<div class="cpt-repeater-section"
 			data-fields="<?php echo htmlspecialchars( wp_json_encode( $fields ), ENT_QUOTES, 'UTF-8' ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
 			data-parent="<?php echo $parent_base; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
-			data-fields-group="<?php esc_attr_e( $fields_group_id ); ?>"
+			data-fields-group="<?php echo esc_attr( $fields_group_id ); ?>"
 		>
 			<?php
 			foreach ( $values as $i => $value ) {
@@ -85,7 +85,7 @@ class CPT_Field_Repeater extends CPT_Field {
 			<div class="cpt-repeater-fields">
 				<?php
 				foreach ( $fields as $i => $field ) {
-					if ( CPT_UI_PREFIX . '_field' == $fields_group_id && 5 == $i ) { //phpcs:ignore Universal.Operators.StrictComparisons
+					if ( CPT_UI_PREFIX . '_field' === $fields_group_id && 5 === $i ) {
 						?>
 						<div class="cpt-repeater-extra">
 							<?php
@@ -227,8 +227,8 @@ add_filter(
 	function ( $meta_value, $meta_key, $meta_type, $field_group, $content_type, $content_id ) {
 		$field_group_id = $field_group['id'];
 		if (
-			'fields' == $meta_key && //phpcs:ignore Universal.Operators.StrictComparisons
-			CPT_UI_PREFIX . '_field' == $field_group_id && //phpcs:ignore Universal.Operators.StrictComparisons
+			'fields' === $meta_key &&
+			CPT_UI_PREFIX . '_field' === $field_group_id &&
 			! empty( $meta_value )
 		) {
 			foreach ( $meta_value as $i => $meta_args ) {

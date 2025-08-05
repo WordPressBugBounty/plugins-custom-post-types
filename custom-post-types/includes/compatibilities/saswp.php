@@ -21,11 +21,11 @@ add_filter(
 
 			foreach ( $fields as $field_config ) {
 				if (
-					'file' == $field_config['type'] &&
+					'file' === $field_config['type'] &&
 					2 > count( $field_config['extra']['types'] ) &&
 				(
 					empty( $field_config['extra']['types'][0] ) ||
-					'image' == $field_config['extra']['types'][0]
+					'image' === $field_config['extra']['types'][0]
 				)
 				) {
 					$meta_image[ $field_config['key'] ] = $field_config['label'];
@@ -75,11 +75,11 @@ if ( ! function_exists( 'get_field_object' ) ) {
 		global $post;
 		$field_object = cpt_fields()->get_field_object( $field, \CPT_Field_Groups::SUPPORT_TYPE_CPT, $post->post_type );
 		if (
-			'file' == $field_object['type'] &&
+			'file' === $field_object['type'] &&
 			2 > count( $field_object['extra']['types'] ) &&
 			(
 				empty( $field_object['extra']['types'][0] ) ||
-				'image' == $field_object['extra']['types'][0]
+				'image' === $field_object['extra']['types'][0]
 			)
 		) {
 			$field_object['type'] = 'image';

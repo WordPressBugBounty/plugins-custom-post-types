@@ -24,7 +24,7 @@ $page_url = function ( $slug ) use ( $pages ) {
 };
 
 $is_current = function ( $current ) use ( $requested_page ) {
-	return $current == $requested_page; //phpcs:ignore Universal.Operators.StrictComparisons
+	return $current === $requested_page;
 };
 ?>
 <nav class="nav-tab-wrapper wp-clearfix" aria-label="Secondary menu">

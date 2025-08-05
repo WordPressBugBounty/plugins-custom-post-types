@@ -58,7 +58,10 @@ class CPT_Field_Select extends CPT_Field {
 	 */
 	public static function render( $input_name, $input_id, $field_config ) {
 		$options = '';
-		if ( 'true' != $field_config['extra']['multiple'] ) {
+
+		$multiple = ! empty( $field_config['extra']['multiple'] ) && true === filter_var( $field_config['extra']['multiple'], FILTER_VALIDATE_BOOLEAN );
+
+		if ( ! $multiple ) {
 			$options .= '<option value=""></option>';
 		}
 		foreach ( $field_config['extra']['options'] as $value => $label ) {
@@ -69,7 +72,7 @@ class CPT_Field_Select extends CPT_Field {
 						'<option value="%s"%s>%s</option>',
 						$child_value,
 						( is_array( $field_config['value'] ) && in_array( $child_value, $field_config['value'], true ) ) ||
-						( ! is_array( $field_config['value'] ) && $child_value == $field_config['value'] ) ? //phpcs:ignore Universal.Operators.StrictComparisons
+						( ! is_array( $field_config['value'] ) && $child_value === $field_config['value'] ) ?
 							'  selected="selected"' :
 							'',
 						$child_label
@@ -85,19 +88,20 @@ class CPT_Field_Select extends CPT_Field {
 					'<option value="%s"%s>%s</option>',
 					$value,
 					( is_array( $field_config['value'] ) && in_array( $value, $field_config['value'], true ) ) ||
-					( ! is_array( $field_config['value'] ) && $value == $field_config['value'] ) ? //phpcs:ignore Universal.Operators.StrictComparisons
+					( ! is_array( $field_config['value'] ) && $value === $field_config['value'] ) ?
 						'  selected="selected"' :
 						'',
 					$label
 				);
 			}
 		}
+
 		return sprintf(
 			'<select name="%s" id="%s" autocomplete="off" aria-autocomplete="none" style="width: 100%%;"%s%s%s>%s</select>',
-			$input_name . ( ! empty( $field_config['extra']['multiple'] ) && 'true' == $field_config['extra']['multiple'] ? '[]' : '' ), //phpcs:ignore Universal.Operators.StrictComparisons
+			$input_name . ( $multiple ? '[]' : '' ),
 			$input_id,
 			! empty( $field_config['extra']['placeholder'] ) ? ' placeholder="' . $field_config['extra']['placeholder'] . '"' : '',
-			! empty( $field_config['extra']['multiple'] ) && 'true' == $field_config['extra']['multiple'] ? ' multiple' : '', //phpcs:ignore Universal.Operators.StrictComparisons
+			$multiple ? ' multiple' : '',
 			! empty( $field_config['required'] ) ? ' required' : '',
 			$options
 		);

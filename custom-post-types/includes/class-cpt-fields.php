@@ -624,7 +624,7 @@ final class CPT_Fields {
 		if ( ! $output_filter ) {
 			return $meta_value;
 		}
-		if ( ! is_string( $meta_value ) && ( ! cpt_utils()->is_rest() || 'the_content' == current_filter() ) ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( ! is_string( $meta_value ) && ( ! cpt_utils()->is_rest() || 'the_content' === current_filter() ) ) {
 			if ( current_user_can( 'edit_posts' ) ) {
 				return sprintf(
 					'<pre><i>%s</i><br>%s</pre>',

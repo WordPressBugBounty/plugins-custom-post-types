@@ -7,7 +7,7 @@ Author: TotalPress.org
 Author URI: https://totalpress.org/?utm_source=wp-dashboard&utm_medium=installed-plugin&utm_campaign=custom-post-types
 Text Domain: custom-post-types
 Domain Path: /languages/
-Version: 5.0.6
+Version: 5.0.7
 */
 
 defined( 'ABSPATH' ) || exit;

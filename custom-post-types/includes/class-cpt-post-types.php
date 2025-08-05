@@ -15,10 +15,20 @@ final class CPT_Post_Types extends CPT_Component {
 
 	public function __construct() {
 		if ( empty( $this->default_args ) ) {
-			$this->default_args = cpt_utils()->get_args( 'post-types-default-args' );
+			add_action(
+				'init',
+				function () {
+					$this->default_args = cpt_utils()->get_args( 'post-types-default-args' );
+				}
+			);
 		}
 		if ( empty( $this->default_labels ) ) {
-			$this->default_labels = cpt_utils()->get_args( 'post-types-default-labels' );
+			add_action(
+				'init',
+				function () {
+					$this->default_labels = cpt_utils()->get_args( 'post-types-default-labels' );
+				}
+			);
 		}
 	}
 
@@ -78,7 +88,7 @@ final class CPT_Post_Types extends CPT_Component {
 			return;
 		}
 		global $pagenow;
-		if ( 'edit.php' == $pagenow && isset( $_GET['post_type'] ) && $_GET['post_type'] == $post_type ) { //phpcs:ignore Universal.Operators.StrictComparisons, WordPress.Security.NonceVerification
+		if ( 'edit.php' === $pagenow && isset( $_GET['post_type'] ) && $_GET['post_type'] === $post_type ) {
 			add_filter(
 				'manage_posts_columns',
 				function ( $post_columns ) use ( $columns ) {
@@ -88,10 +98,10 @@ final class CPT_Post_Types extends CPT_Component {
 					unset( $post_columns['date'] );
 
 					foreach ( $columns as $key => $args ) {
-						if ( 'title' == $key && empty( $args['label'] ) ) { //phpcs:ignore Universal.Operators.StrictComparisons
+						if ( 'title' === $key && empty( $args['label'] ) ) {
 							$args['label'] = $stored_title_label;
 						}
-						if ( 'date' == $key && empty( $args['label'] ) ) { //phpcs:ignore Universal.Operators.StrictComparisons
+						if ( 'date' === $key && empty( $args['label'] ) ) {
 							$args['label'] = $stored_date_label;
 						}
 						$post_columns[ $key ] = $args['label'];
@@ -141,14 +151,14 @@ final class CPT_Post_Types extends CPT_Component {
 
 			foreach ( $post_metas as $key => $value ) {
 				$single_meta = get_post_meta( $post_type->ID, $key, true );
-				if ( substr( $key, 0, 7 ) == 'labels_' ) { //phpcs:ignore Universal.Operators.StrictComparisons
+				if ( 'labels_' === substr( $key, 0, 7 ) ) {
 					if ( ! empty( $single_meta ) ) {
 						$post_type_labels[ str_replace( 'labels_', '', $key ) ] = $single_meta;
 					}
-				} elseif ( substr( $key, 0, 1 ) == '_' || empty( $single_meta ) ) { //phpcs:ignore Universal.Operators.StrictComparisons
+				} elseif ( '_' === substr( $key, 0, 1 ) || empty( $single_meta ) ) {
 					unset( $post_metas[ $key ] );
 				} else {
-					$post_type_args[ $key ] = in_array( $single_meta, array( 'true', 'false' ), true ) ? ( 'true' == $single_meta ) : $single_meta; //phpcs:ignore Universal.Operators.StrictComparisons
+					$post_type_args[ $key ] = in_array( $single_meta, array( 'true', 'false' ), true ) ? ( true === filter_var( $single_meta, FILTER_VALIDATE_BOOLEAN ) ) : $single_meta;
 				}
 				unset( $post_metas[ $key ] );
 			}
@@ -285,7 +295,7 @@ final class CPT_Post_Types extends CPT_Component {
 				break;
 			}
 			$id = ! empty( $post_type['id'] ) && is_string( $post_type['id'] ) ? $post_type['id'] : false;
-			if ( $id == $post_type_id ) {
+			if ( $id === $post_type_id ) {
 				$flush_rewrite_rules = true;
 			}
 		}

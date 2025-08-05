@@ -53,7 +53,7 @@ class CPT_Field_Radio extends CPT_Field {
 				'<label><input type="radio" name="%s" value="%s"%s%s>%s<label><br>',
 				$input_name, //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				$value, //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				$value == $field_config['value'] ? ' checked="checked"' : '', //phpcs:ignore Universal.Operators.StrictComparisons
+				$value === $field_config['value'] ? ' checked="checked"' : '',
 				! empty( $field_config['required'] ) ? ' required' : '',
 				$label //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			);

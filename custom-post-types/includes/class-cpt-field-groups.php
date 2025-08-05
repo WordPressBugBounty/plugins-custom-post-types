@@ -27,17 +27,24 @@ final class CPT_Field_Groups extends CPT_Component {
 	 * @return array|mixed
 	 */
 	private function sanitize_field_args( $field = array() ) {
-		$field['required'] = ! empty( $field['required'] ) && 'true' == $field['required']; //phpcs:ignore Universal.Operators.StrictComparisons
+		$field['required'] = ! empty( $field['required'] ) && true === filter_var( $field['required'], FILTER_VALIDATE_BOOLEAN );
 		if ( ! empty( $field['extra']['options'] ) && ! is_array( $field['extra']['options'] ) ) {
 			$field['extra']['options'] = cpt_utils()->get_options_from_string( $field['extra']['options'] );
 		}
 		foreach ( $field as $key => $value ) {
-			if ( substr( $key, 0, 5 ) == 'wrap_' ) { //phpcs:ignore Universal.Operators.StrictComparisons
+			if ( 'wrap_' === substr( $key, 0, 5 ) ) {
 				if ( ! empty( $value ) ) {
 					$field['wrap'][ str_replace( 'wrap_', '', $key ) ] = $value;
 				}
 				unset( $field[ $key ] );
 			}
+		}
+		if ( ! empty( $field['extra']['fields'] ) ) {
+			$fields                   = array_map(
+				array( $this, 'sanitize_field_args' ),
+				$field['extra']['fields']
+			);
+			$field['extra']['fields'] = $fields;
 		}
 		return $field;
 	}
@@ -76,8 +83,8 @@ final class CPT_Field_Groups extends CPT_Component {
 			) : array();
 			$position     = ! empty( get_post_meta( $group->ID, 'position', true ) ) ? get_post_meta( $group->ID, 'position', true ) : 'normal';
 			$order        = get_post_meta( $group->ID, 'order', true );
-			$admin_only   = 'true' == get_post_meta( $group->ID, 'admin_only', true ); //phpcs:ignore Universal.Operators.StrictComparisons
-			$show_in_rest = 'true' == get_post_meta( $group->ID, 'show_in_rest', true ); //phpcs:ignore Universal.Operators.StrictComparisons
+			$admin_only   = true === filter_var( get_post_meta( $group->ID, 'admin_only', true ), FILTER_VALIDATE_BOOLEAN );
+			$show_in_rest = true === filter_var( get_post_meta( $group->ID, 'show_in_rest', true ), FILTER_VALIDATE_BOOLEAN );
 			$fields       = ! empty( get_post_meta( $group->ID, 'fields', true ) ) ? array_map(
 				array( $this, 'sanitize_field_args' ),
 				get_post_meta( $group->ID, 'fields', true )

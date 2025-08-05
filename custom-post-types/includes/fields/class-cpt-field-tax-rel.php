@@ -78,12 +78,14 @@ class CPT_Field_Tax_Rel extends CPT_Field {
 			}
 		}
 
+		$multiple = ! empty( $field_config['extra']['multiple'] ) && true === filter_var( $field_config['extra']['multiple'], FILTER_VALIDATE_BOOLEAN );
+
 		return sprintf(
 			'<select name="%s" id="%s" autocomplete="off" aria-autocomplete="none" style="width: 100%%;"%s%s data-type="%s"%s>%s</select>',
-			$input_name . ( ! empty( $field_config['extra']['multiple'] ) && 'true' == $field_config['extra']['multiple'] ? '[]' : '' ), //phpcs:ignore Universal.Operators.StrictComparisons
+			$input_name . ( $multiple ? '[]' : '' ),
 			$input_id,
 			! empty( $field_config['extra']['placeholder'] ) ? ' placeholder="' . $field_config['extra']['placeholder'] . '"' : '',
-			! empty( $field_config['extra']['multiple'] ) && 'true' == $field_config['extra']['multiple'] ? ' multiple' : '', //phpcs:ignore Universal.Operators.StrictComparisons
+			$multiple ? ' multiple' : '',
 			! empty( $field_config['extra']['taxonomy'] ) ? $field_config['extra']['taxonomy'] : 'category',
 			! empty( $field_config['required'] ) ? ' required' : '',
 			$options

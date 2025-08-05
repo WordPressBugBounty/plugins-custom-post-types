@@ -53,7 +53,7 @@ final class CPT_Plugin extends CPT_Component {
 	 * @return mixed
 	 */
 	public function plugin_links( $actions, $plugin_file ) {
-		if ( 'custom-post-types/custom-post-types.php' == $plugin_file ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( 'custom-post-types/custom-post-types.php' === $plugin_file ) {
 			$actions[] = sprintf(
 				'<a href="%1$s" target="_blank" aria-label="%2$s"> %2$s </a>',
 				CPT_PLUGIN_SUPPORT_URL,

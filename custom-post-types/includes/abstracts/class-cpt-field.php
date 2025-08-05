@@ -13,7 +13,7 @@ abstract class CPT_Field {
 	public static function sanitize_value( $meta_value, $meta_key, $meta_type ) {
 		/** @var CPT_Field $field_class */
 		$field_class = get_called_class();
-		if ( $field_class::get_type() == $meta_type ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( $field_class::get_type() === $meta_type ) {
 			return $field_class::sanitize( $meta_value );
 		}
 		return $meta_value;
@@ -29,7 +29,7 @@ abstract class CPT_Field {
 	public static function get_value( $meta_value, $meta_key, $meta_type ) {
 		/** @var CPT_Field $field_class */
 		$field_class = get_called_class();
-		if ( $field_class::get_type() == $meta_type ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( $field_class::get_type() === $meta_type ) {
 			return $field_class::get( $meta_value );
 		}
 		return $meta_value;

@@ -62,7 +62,7 @@ final class CPT_Admin_Pages extends CPT_Component {
 			$page_parent = ! empty( get_post_meta( $page->ID, 'parent', true ) ) ? get_post_meta( $page->ID, 'parent', true ) : null;
 			$page_order  = is_numeric( get_post_meta( $page->ID, 'order', true ) ) ? get_post_meta( $page->ID, 'order', true ) : null;
 			$page_icon   = ! empty( get_post_meta( $page->ID, 'menu_icon', true ) ) ? get_post_meta( $page->ID, 'menu_icon', true ) : '';
-			$admin_only  = 'true' == get_post_meta( $page->ID, 'admin_only', true ); //phpcs:ignore Universal.Operators.StrictComparisons
+			$admin_only  = true === filter_var( get_post_meta( $page->ID, 'admin_only', true ), FILTER_VALIDATE_BOOLEAN );
 			if ( $page_parent && stripos( $page_parent, '/' ) !== false ) {
 				$page_parent = explode( '/', $page_parent );
 				$page_parent = end( $page_parent );

@@ -47,7 +47,7 @@ class CPT_Field_Color extends CPT_Field {
 			$input_name,
 			$input_id,
 			$field_config['value'],
-			! empty( $field_config['extra']['alpha'] ) && 'true' == $field_config['extra']['alpha'] ? ' data-alpha-enabled="true" data-alpha-color-type="hex"' : '', //phpcs:ignore Universal.Operators.StrictComparisons
+			! empty( $field_config['extra']['alpha'] ) && true === filter_var( $field_config['extra']['alpha'], FILTER_VALIDATE_BOOLEAN ) ? ' data-alpha-enabled="true" data-alpha-color-type="hex"' : '',
 			! empty( $field_config['required'] ) ? ' required' : ''
 		);
 	}

@@ -112,7 +112,7 @@ class CPT_Field_File extends CPT_Field {
 		$file_type  = get_post_mime_type( $meta_value );
 		$file_types = explode( '/', $file_type );
 		$main_type  = isset( $file_types[0] ) ? $file_types[0] : false;
-		if ( $main_type && 'image' == $main_type ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( $main_type && 'image' === $main_type ) {
 			return wp_get_attachment_image( $meta_value, 'full' );
 		}
 		return wp_get_attachment_url( $meta_value );

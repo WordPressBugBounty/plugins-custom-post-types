@@ -25,7 +25,7 @@ final class CPT_Admin_Notices extends CPT_Component {
 			'callback' => function ( $params ) {
 				$notice   = $params['key'];
 				$duration = $params['duration'];
-				$this->dismiss_notice( $notice, ( 'lifetime' == $duration ? -1 : intval( $duration ) ) ); //phpcs:ignore Universal.Operators.StrictComparisons
+				$this->dismiss_notice( $notice, ( 'lifetime' === $duration ? -1 : intval( $duration ) ) );
 				return 'OK';
 			},
 		);
@@ -95,16 +95,16 @@ final class CPT_Admin_Notices extends CPT_Component {
 					$is_cta ? 'class="button button-secondary"' : '',
 					! empty( $button['target'] ) ? $button['target'] : '_self',
 					! empty( $button['label'] ) ? esc_html( $button['label'] ) : '',
-					! empty( $button['target'] ) && '_blank' == $button['target'] && ! $is_cta ? '<span class="dashicons dashicons-external"></span>' : '' //phpcs:ignore Universal.Operators.StrictComparisons
+					! empty( $button['target'] ) && '_blank' === $button['target'] && ! $is_cta ? '<span class="dashicons dashicons-external"></span>' : ''
 				);
 			}
 		}
 		if ( $dismissible ) {
-			$button_label     = true === $dismissible ? __( 'Dismiss notice', 'custom-post-types' ) : sprintf( __( 'Dismiss notice for %s days', 'custom-post-types' ), (int) $dismissible ); //phpcs:ignore Universal.Operators.StrictComparisons
+			$button_label     = true === $dismissible ? __( 'Dismiss notice', 'custom-post-types' ) : sprintf( __( 'Dismiss notice for %s days', 'custom-post-types' ), (int) $dismissible );
 			$notice_buttons[] = sprintf(
 				'<a href="#" class="cpt-dismiss-notice" data-notice="%1$s" data-duration="%2$s" title="%3$s" aria-label="%3$s">%3$s</a>',
 				$id,
-				( true === $dismissible ? 'lifetime' : $dismissible ), //phpcs:ignore Universal.Operators.StrictComparisons
+				( true === $dismissible ? 'lifetime' : $dismissible ),
 				$button_label
 			);
 		}
@@ -145,7 +145,7 @@ final class CPT_Admin_Notices extends CPT_Component {
 			$id          = ! empty( get_post_meta( $notice->ID, 'id', true ) ) ? sanitize_title( get_post_meta( $notice->ID, 'id', true ) ) : sanitize_title( $notice->post_title );
 			$type        = ! empty( get_post_meta( $notice->ID, 'type', true ) ) ? get_post_meta( $notice->ID, 'type', true ) : 'info';
 			$dismissable = ! empty( get_post_meta( $notice->ID, 'dismissible', true ) ) ? get_post_meta( $notice->ID, 'dismissible', true ) : false;
-			$admin_only  = 'true' == get_post_meta( $notice->ID, 'admin_only', true ); //phpcs:ignore Universal.Operators.StrictComparisons
+			$admin_only  = true === filter_var( get_post_meta( $notice->ID, 'admin_only', true ), FILTER_VALIDATE_BOOLEAN );
 			$buttons     = ! empty( get_post_meta( $notice->ID, 'buttons', true ) ) ? get_post_meta( $notice->ID, 'buttons', true ) : false;
 			if ( $dismissable < 0 ) {
 				$dismissable = true;

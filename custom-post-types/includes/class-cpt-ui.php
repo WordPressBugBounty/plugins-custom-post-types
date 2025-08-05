@@ -30,7 +30,7 @@ final class CPT_Ui extends CPT_Component {
 	 * @return void
 	 */
 	public function add_feedback_modal() {
-		if ( get_current_screen()->id == 'plugins' ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( 'plugins' === get_current_screen()->id ) {
 			require_once CPT_PATH . '/includes/templates/modal-feedback.php';
 		}
 	}
@@ -86,7 +86,7 @@ final class CPT_Ui extends CPT_Component {
 			return;
 		}
 
-		$action = ! empty( $_GET['action'] ) && 'cpt-feedback' == $_GET['action'] ? $_GET['action'] : false; //phpcs:ignore Universal.Operators.StrictComparisons
+		$action = ! empty( $_GET['action'] ) && 'cpt-feedback' === $_GET['action'] ? $_GET['action'] : false;
 		if ( ! $action ) {
 			return;
 		}
@@ -128,7 +128,7 @@ final class CPT_Ui extends CPT_Component {
 	public function sanitize_ui_id_fields( $meta_value, $meta_key, $meta_type, $field_group ) {
 		$field_group_id = $field_group['id'];
 		if (
-			'id' == $meta_key && //phpcs:ignore Universal.Operators.StrictComparisons
+			'id' === $meta_key &&
 			in_array( $field_group_id, array( CPT_UI_PREFIX, CPT_UI_PREFIX . '_tax', CPT_UI_PREFIX . '_field', CPT_UI_PREFIX . '_page', CPT_UI_PREFIX . '_notice' ), true )
 		) {
 			$meta_value = sanitize_title( $meta_value );
@@ -144,7 +144,7 @@ final class CPT_Ui extends CPT_Component {
 	public function generate_post_title( $post_id ) {
 		$post_type   = get_post( $post_id )->post_type;
 		$post_status = get_post( $post_id )->post_status;
-		if ( ! in_array( $post_type, $this->no_title_post_types, true ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || 'trash' == $post_status ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( ! in_array( $post_type, $this->no_title_post_types, true ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || 'trash' === $post_status ) {
 			return $post_id;
 		}
 		$new_title = ! empty( $_POST['meta-fields']['plural'] ) ? sanitize_text_field( wp_unslash( $_POST['meta-fields']['plural'] ) ) : 'CPT_' . $post_id; //phpcs:ignore WordPress.Security.NonceVerification

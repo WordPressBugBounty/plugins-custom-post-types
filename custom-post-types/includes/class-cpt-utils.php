@@ -195,11 +195,11 @@ final class CPT_Utils {
 	 */
 	public function get_post_title_with_parents( $post_id = 0, $title = '' ) {
 		$post = get_post( $post_id );
-		if ( 0 == $post_id || ! $post ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( 0 === $post_id || ! $post ) {
 			return $title;
 		}
 		$title = empty( $title ) ? $post->post_title : $title;
-		if ( 0 == $post->post_parent ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( 0 === $post->post_parent ) {
 			return $title;
 		}
 		$title = get_the_title( $post->post_parent ) . ' > ' . $title;
@@ -214,11 +214,11 @@ final class CPT_Utils {
 	 */
 	public function get_term_title_with_parents( $term_id = 0, $title = '' ) {
 		$term = get_term( $term_id );
-		if ( 0 == $term_id || ! $term ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( 0 === $term_id || ! $term ) {
 			return $title;
 		}
 		$title = empty( $title ) ? $term->name : $title;
-		if ( 0 == $term->parent ) { //phpcs:ignore Universal.Operators.StrictComparisons
+		if ( 0 === $term->parent ) {
 			return $title;
 		}
 		$title = get_term( $term->parent )->name . ' > ' . $title;
@@ -231,10 +231,8 @@ final class CPT_Utils {
 	public function is_rest() {
 		$prefix = rest_get_url_prefix();
 		if (
-			defined( 'REST_REQUEST' ) &&
-			REST_REQUEST ||
-			isset( $_GET['rest_route'] ) && //phpcs:ignore WordPress.Security.NonceVerification
-			0 === strpos( trim( $_GET['rest_route'], '\\/' ), $prefix ) //phpcs:ignore WordPress.Security.NonceVerification
+			( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
+			( isset( $_GET['rest_route'] ) && 0 === strpos( trim( $_GET['rest_route'], '\\/' ), $prefix ) ) //phpcs:ignore WordPress.Security.NonceVerification
 		) {
 			return true;
 		}
@@ -455,7 +453,7 @@ final class CPT_Utils {
 			if (
 				empty( $registered_menu[2] ) || // error
 				strpos( $registered_menu[2], '.php' ) !== false || // core page
-				( ! empty( $registered_menu[4] ) && 'wp-menu-separator' == $registered_menu[4] )  //phpcs:ignore Universal.Operators.StrictComparisons
+				( ! empty( $registered_menu[4] ) && 'wp-menu-separator' === $registered_menu[4] )
 			) {
 				continue;
 			}
@@ -597,11 +595,11 @@ final class CPT_Utils {
 			'required' => false,
 			'type'     => 'select',
 			'extra'    => array(
-				'placeholder' => ( 'NO' == $default_value ? $no : $yes ) . $default_label, //phpcs:ignore Universal.Operators.StrictComparisons
+				'placeholder' => ( 'NO' === $default_value ? $no : $yes ) . $default_label,
 				'multiple'    => false,
 				'options'     => array(
-					'true'  => $yes . ( 'NO' == $default_value ? '' : $default_label ), //phpcs:ignore Universal.Operators.StrictComparisons
-					'false' => $no . ( 'NO' == $default_value ? $default_label : '' ), //phpcs:ignore Universal.Operators.StrictComparisons
+					'true'  => $yes . ( 'NO' === $default_value ? '' : $default_label ),
+					'false' => $no . ( 'NO' === $default_value ? $default_label : '' ),
 				),
 			),
 			'wrap'     => array(
@@ -642,7 +640,7 @@ final class CPT_Utils {
 	 * @return array
 	 */
 	public function get_ui_min_field( $wrap_width = '', $type = 'number' ) {
-		$extra = 'number' == $type ? array(
+		$extra = 'number' === $type ? array(
 			'min'         => '0',
 			'placeholder' => '0',
 		) : array();
@@ -669,7 +667,7 @@ final class CPT_Utils {
 	 * @return array
 	 */
 	public function get_ui_max_field( $wrap_width = '', $type = 'number' ) {
-		$extra = 'number' == $type ? array( 'min' => '0' ) : array();
+		$extra = 'number' === $type ? array( 'min' => '0' ) : array();
 		return array(
 			'key'      => 'max',
 			'label'    => __( 'Max', 'custom-post-types' ),
